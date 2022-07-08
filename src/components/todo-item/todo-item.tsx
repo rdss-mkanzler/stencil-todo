@@ -1,4 +1,4 @@
-import { Component, h, Prop } from '@stencil/core';
+import { Component, h, Prop, Host } from '@stencil/core';
 
 @Component({
     tag: 'todo-item',
@@ -9,6 +9,11 @@ export class TodoItem {
     @Prop() todo: string;
 
     render() {
-        return <li>{this.todo}</li>;
+        return (
+            <Host class={'is-done'}>
+                <div class="todo-state"></div>
+                <div class="todo">{this.todo}</div>
+            </Host>
+        );
     }
 }

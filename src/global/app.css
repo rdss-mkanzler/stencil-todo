@@ -1,3 +1,8 @@
+:root {
+    --todo-list-font-size: 1.25rem;
+    --todo-item-space: 10px;
+}
+
 * {
     box-sizing: border-box;
     font-family: sans-serif;

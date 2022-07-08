@@ -1,3 +1,15 @@
 :host {
-  display: block;
+    display: block;
+    margin-left: calc(var(--todo-list-font-size) + 5px);
+    margin-bottom: calc(var(--todo-item-space) + 5px);
+}
+
+input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    border-bottom: 2px solid black;
+
+    font-size: var(--todo-list-font-size);
 }

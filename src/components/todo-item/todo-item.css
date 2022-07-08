@@ -1,3 +1,21 @@
 :host {
-  display: block;
+    display: block;
+    font-size: var(--todo-list-font-size);
+    display: grid;
+    grid-template-columns: var(--todo-list-font-size) auto;
+    grid-template-rows: var(--todo-list-font-size) auto;
+    gap: 5px;
+
+    margin: var(--todo-item-space) 0;
+}
+
+:host.is-done .todo-state {
+    border: 2px solid black;
+    border-radius: 100%;
+}
+
+.todo-state:hover {
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 100%;
 }

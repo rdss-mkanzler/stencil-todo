@@ -8,28 +8,30 @@ import { Component, h, Listen, State } from '@stencil/core';
 export class TodoList {
     @State() todos: string[] = [];
 
-    componentWillLoad() {
-        this.todos = ['TODO 1', 'TODO 2'];
-    }
+    componentWillLoad() {}
 
     @Listen('todoCreated')
     addTodo(event) {
-        console.log('FROM LISTEN:', event.detail);
+        this.todos = [...this.todos, event.detail];
     }
 
+    /*
     addTodo2(event) {
         console.log('FROM ELEMENT:', event.detail);
     }
+    */
 
     render() {
         return (
             <section>
                 <h2>TODO List</h2>
                 <ul>
+                    {/*<todo-item-new onTodoCreated={event => this.addTodo2(event)}></todo-item-new>*/}
+                    <todo-item-new />
+
                     {this.todos.map(todo => (
                         <todo-item todo={todo}></todo-item>
                     ))}
-                    <todo-item-new onTodoCreated={event => this.addTodo2(event)}></todo-item-new>
                 </ul>
             </section>
         );
