@@ -20,6 +20,17 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface TodoItem {
+        "todo": string;
+    }
+    interface TodoItemNew {
+    }
+    interface TodoList {
+    }
+}
+export interface TodoItemNewCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLTodoItemNewElement;
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +39,29 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLTodoItemElement extends Components.TodoItem, HTMLStencilElement {
+    }
+    var HTMLTodoItemElement: {
+        prototype: HTMLTodoItemElement;
+        new (): HTMLTodoItemElement;
+    };
+    interface HTMLTodoItemNewElement extends Components.TodoItemNew, HTMLStencilElement {
+    }
+    var HTMLTodoItemNewElement: {
+        prototype: HTMLTodoItemNewElement;
+        new (): HTMLTodoItemNewElement;
+    };
+    interface HTMLTodoListElement extends Components.TodoList, HTMLStencilElement {
+    }
+    var HTMLTodoListElement: {
+        prototype: HTMLTodoListElement;
+        new (): HTMLTodoListElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "todo-item": HTMLTodoItemElement;
+        "todo-item-new": HTMLTodoItemNewElement;
+        "todo-list": HTMLTodoListElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +79,19 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface TodoItem {
+        "todo"?: string;
+    }
+    interface TodoItemNew {
+        "onTodoCreated"?: (event: TodoItemNewCustomEvent<string>) => void;
+    }
+    interface TodoList {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "todo-item": TodoItem;
+        "todo-item-new": TodoItemNew;
+        "todo-list": TodoList;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +99,9 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "todo-item": LocalJSX.TodoItem & JSXBase.HTMLAttributes<HTMLTodoItemElement>;
+            "todo-item-new": LocalJSX.TodoItemNew & JSXBase.HTMLAttributes<HTMLTodoItemNewElement>;
+            "todo-list": LocalJSX.TodoList & JSXBase.HTMLAttributes<HTMLTodoListElement>;
         }
     }
 }
