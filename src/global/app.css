@@ -1,6 +1,7 @@
 :root {
     --todo-list-font-size: 1.25rem;
     --todo-item-space: 10px;
+    --todo-state-space: 10px;
 }
 
 * {
@@ -9,9 +10,4 @@
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-
-    height: 100vh;
 }

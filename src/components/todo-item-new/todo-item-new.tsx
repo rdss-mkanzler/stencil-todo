@@ -1,4 +1,5 @@
 import { Component, h, State, Event, EventEmitter } from '@stencil/core';
+import { Todo } from '../../classes/todo/todo.class';
 
 @Component({
     tag: 'todo-item-new',
@@ -6,7 +7,7 @@ import { Component, h, State, Event, EventEmitter } from '@stencil/core';
     shadow: true,
 })
 export class TodoItem {
-    @Event() todoCreated: EventEmitter<string>;
+    @Event() todoCreated: EventEmitter<Todo>;
 
     @State() title: string;
 
@@ -17,7 +18,9 @@ export class TodoItem {
     handleSubmit(event) {
         event.preventDefault();
         if (this.isValid) {
-            this.todoCreated.emit(this.title);
+            let todo: Todo = new Todo(this.title);
+            this.todoCreated.emit(todo);
+
             this.title = '';
         }
     }
@@ -28,11 +31,11 @@ export class TodoItem {
 
     render() {
         return (
-            <li>
+            <article>
                 <form onSubmit={event => this.handleSubmit(event)}>
                     <input value={this.title} onInput={event => this.handleInput(event)} />
                 </form>
-            </li>
+            </article>
         );
     }
 }

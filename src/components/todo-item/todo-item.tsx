@@ -1,4 +1,5 @@
-import { Component, h, Prop, Host } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/core';
+import { Todo } from '../../classes/todo/todo.class';
 
 @Component({
     tag: 'todo-item',
@@ -6,14 +7,35 @@ import { Component, h, Prop, Host } from '@stencil/core';
     shadow: true,
 })
 export class TodoItem {
-    @Prop() todo: string;
+    @Event() todoChanged: EventEmitter<Todo>;
+
+    @Prop() todo: Todo;
+
+    @State() className: string = 'todo-item';
+
+    handleStateChange(event) {
+        let todo: Todo = { ...this.todo };
+        todo.done = !todo.done;
+        this.todoChanged.emit(todo);
+    }
+
+    @Watch('todo')
+    watchTodoHandler(newValue: Todo, oldValue: Todo) {
+        this.className = this.todoItemClass(newValue);
+    }
+
+    todoItemClass(todo: Todo) {
+        let className = 'todo-item';
+        className += todo.done ? ' is-done' : '';
+        return className;
+    }
 
     render() {
         return (
-            <Host class={'is-done'}>
-                <div class="todo-state"></div>
-                <div class="todo">{this.todo}</div>
-            </Host>
+            <article class={this.className}>
+                <div class="todo-state" onClick={event => this.handleStateChange(event)}></div>
+                <div class="todo">{this.todo.title}</div>
+            </article>
         );
     }
 }

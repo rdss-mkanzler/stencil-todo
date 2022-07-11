@@ -1,21 +1,41 @@
-:host {
+article {
     display: block;
     font-size: var(--todo-list-font-size);
     display: grid;
     grid-template-columns: var(--todo-list-font-size) auto;
     grid-template-rows: var(--todo-list-font-size) auto;
-    gap: 5px;
+    gap: var(--todo-state-space);
 
     margin: var(--todo-item-space) 0;
 }
 
-:host.is-done .todo-state {
-    border: 2px solid black;
-    border-radius: 100%;
-}
-
-.todo-state:hover {
+article .todo-state {
     cursor: pointer;
     border: 2px solid black;
     border-radius: 100%;
+
+    position: relative;
+}
+
+article.is-done .todo-state:after,
+article .todo-state:hover::after {
+    content: 'X';
+    position: absolute;
+    top: -2px;
+    left: 1.5px;
+
+    color: black;
+}
+
+article.is-done .todo-state:after {
+    color: #888;
+}
+
+article .todo-state:hover::after {
+    color: black !important;
+}
+
+article.is-done .todo {
+    text-decoration: line-through;
+    color: #888;
 }
