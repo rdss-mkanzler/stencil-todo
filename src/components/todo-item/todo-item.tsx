@@ -14,6 +14,10 @@ export class TodoItem {
 
     @State() className: string = 'todo-item';
 
+    componentWillLoad() {
+        this.watchTodoHandler(this.todo);
+    }
+
     handleStateChange(event) {
         this.todoStateChanged.emit(this.todo);
     }
@@ -23,13 +27,16 @@ export class TodoItem {
     }
 
     @Watch('todo')
-    watchTodoHandler(newValue: Todo, oldValue: Todo) {
+    watchTodoHandler(newValue: Todo) {
+        console.log('watch todo');
         this.className = this.todoItemClass(newValue);
     }
 
     todoItemClass(todo: Todo) {
+        console.log('here', todo);
         let className = 'todo-item';
         className += todo.done ? ' is-done' : '';
+        console.log(className);
         return className;
     }
 

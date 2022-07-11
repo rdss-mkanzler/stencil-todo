@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from '@stencil/core';
+import { Component, h, Listen, State, Watch } from '@stencil/core';
 import { Todo } from '../../classes/todo/todo.class';
 
 @Component({
@@ -9,7 +9,19 @@ import { Todo } from '../../classes/todo/todo.class';
 export class TodoList {
     @State() todos: Todo[] = [];
 
-    componentWillLoad() {}
+    componentWillLoad() {
+        let todos = window.localStorage.getItem('todos');
+        console.log(todos);
+        if (todos) {
+            this.todos = JSON.parse(todos);
+        }
+    }
+
+    @Watch('todos')
+    watchTodosHandler(newValue: Todo[]) {
+        console.log('TODOs changed', newValue.length);
+        window.localStorage.setItem('todos', JSON.stringify(newValue));
+    }
 
     @Listen('todoCreated')
     addTodo(event) {

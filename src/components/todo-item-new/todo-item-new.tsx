@@ -33,7 +33,7 @@ export class TodoItem {
         return (
             <article>
                 <form onSubmit={event => this.handleSubmit(event)}>
-                    <input value={this.title} onInput={event => this.handleInput(event)} />
+                    <input value={this.title} placeholder="Add new item..." onInput={event => this.handleInput(event)} />
                 </form>
             </article>
         );
