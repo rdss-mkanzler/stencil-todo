@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
     namespace: 'stencil-todo',
@@ -18,5 +19,6 @@ export const config: Config = {
             serviceWorker: null, // disable service workers
         },
     ],
-    globalStyle: 'src/global/app.css',
+    globalStyle: 'src/global/app.scss',
+    plugins: [sass({})],
 };

@@ -1,0 +1,15 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+    border-bottom: 2px solid black;
+}

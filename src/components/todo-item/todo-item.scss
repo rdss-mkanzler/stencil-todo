@@ -1,0 +1,97 @@
+@import '../../assets/fontawesome/css/all.min.css';
+
+article {
+    display: block;
+    font-size: var(--todo-list-font-size);
+    display: grid;
+    grid-template-columns: auto 1fr 3rem;
+    grid-template-rows: auto auto;
+    gap: var(--todo-state-space);
+
+    margin: var(--todo-item-space) 0;
+
+    &.is-done {
+        .todo-state {
+            .check {
+                position: absolute;
+                display: block;
+
+                top: -3px;
+                left: 0;
+                font-size: 1.5rem;
+            }
+        }
+
+        .todo {
+            text-decoration: line-through;
+            color: var(--todo-gray-color);
+        }
+
+        .todo-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: var(--todo-item-space);
+
+            opacity: 0;
+        }
+    }
+
+    &:hover {
+        .todo-actions {
+            opacity: 1;
+        }
+    }
+
+    .todo-state {
+        cursor: pointer;
+        border: 2px solid black;
+        border-radius: 100%;
+
+        position: relative;
+
+        width: var(--todo-list-font-size);
+        height: var(--todo-list-font-size);
+
+        &:hover {
+            .check {
+                position: absolute;
+                display: block;
+
+                top: -3px;
+                left: 0;
+                font-size: 1.5rem;
+
+                color: var(--todo-gray-highlight-color) !important;
+            }
+        }
+
+        .check {
+            color: var(--todo-gray-color);
+            display: none;
+        }
+    }
+
+    .todo-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--todo-item-space);
+
+        opacity: 0;
+
+        .action {
+            color: var(--todo-gray-color);
+            font-size: 1rem;
+
+            &:first-of-type {
+                margin-left: auto;
+            }
+
+            &:hover {
+                color: var(--todo-gray-highlight-color);
+                cursor: pointer;
+            }
+        }
+    }
+}

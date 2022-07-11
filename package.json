@@ -30,6 +30,7 @@
     "shortid": "^2.2.16"
   },
   "devDependencies": {
+    "@stencil/sass": "^1.5.2",
     "@types/jest": "^27.0.3",
     "jest": "^27.4.5",
     "jest-cli": "^27.4.5",

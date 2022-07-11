@@ -1,0 +1,16 @@
+:host {
+    display: block;
+    margin-left: calc(var(--todo-list-font-size) + var(--todo-state-space));
+    margin-bottom: calc(var(--todo-item-space) + 5px);
+
+    input {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        width: calc(100% - (var(--todo-state-space) / 2));
+
+        border-bottom: 2px solid black;
+
+        font-size: var(--todo-list-font-size);
+    }
+}

@@ -3,7 +3,7 @@ import { Todo } from '../../classes/todo/todo.class';
 
 @Component({
     tag: 'todo-item',
-    styleUrl: 'todo-item.css',
+    styleUrl: 'todo-item.scss',
     shadow: true,
 })
 export class TodoItem {

@@ -3,7 +3,7 @@ import { Todo } from '../../classes/todo/todo.class';
 
 @Component({
     tag: 'todo-list',
-    styleUrl: 'todo-list.css',
+    styleUrl: 'todo-list.scss',
     shadow: true,
 })
 export class TodoList {
@@ -102,7 +102,7 @@ export class TodoList {
                     />
                     <span class="title-static">{this.todoListTitle}</span>{' '}
                     <button class="edit" onClick={event => this.toggleTodoListTitleEditState(event)}>
-                        {this.todoListTitleEdit ? <i class="fa-solid fa-circle-check"></i> : <i class="fa-solid fa-pen"></i>}
+                        {this.todoListTitleEdit ? <i class="fa-solid fa-arrow-right"></i> : <i class="fa-solid fa-pen"></i>}
                     </button>
                 </h2>
                 <div class="todo-list">
