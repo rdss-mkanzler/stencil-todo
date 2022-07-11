@@ -7,16 +7,19 @@ import { Todo } from '../../classes/todo/todo.class';
     shadow: true,
 })
 export class TodoItem {
-    @Event() todoChanged: EventEmitter<Todo>;
+    @Event() todoStateChanged: EventEmitter<Todo>;
+    @Event() todoDeleted: EventEmitter<Todo>;
 
     @Prop() todo: Todo;
 
     @State() className: string = 'todo-item';
 
     handleStateChange(event) {
-        let todo: Todo = { ...this.todo };
-        todo.done = !todo.done;
-        this.todoChanged.emit(todo);
+        this.todoStateChanged.emit(this.todo);
+    }
+
+    handleTodoDeletion(event) {
+        this.todoDeleted.emit(this.todo);
     }
 
     @Watch('todo')
@@ -39,7 +42,7 @@ export class TodoItem {
                 <div class="todo">{this.todo.title}</div>
                 <div class="todo-actions">
                     <i class="action edit fa-solid fa-pen"></i>
-                    <i class="action delete fa-solid fa-trash"></i>
+                    <i class="action delete fa-solid fa-trash" onClick={event => this.handleTodoDeletion(event)}></i>
                 </div>
             </article>
         );

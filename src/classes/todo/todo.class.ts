@@ -1,3 +1,5 @@
+import shortid from 'shortid';
+
 export class Todo {
     id: string;
     title: string;
@@ -5,6 +7,7 @@ export class Todo {
     created: Date;
 
     constructor(title: string) {
+        this.id = shortid.generate();
         this.title = title;
         this.done = false;
         this.created = new Date();

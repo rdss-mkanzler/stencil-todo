@@ -85,7 +85,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface TodoItem {
-        "onTodoChanged"?: (event: TodoItemCustomEvent<Todo>) => void;
+        "onTodoDeleted"?: (event: TodoItemCustomEvent<Todo>) => void;
+        "onTodoStateChanged"?: (event: TodoItemCustomEvent<Todo>) => void;
         "todo"?: Todo;
     }
     interface TodoItemNew {

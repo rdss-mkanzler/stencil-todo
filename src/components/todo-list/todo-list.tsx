@@ -16,14 +16,14 @@ export class TodoList {
         this.todos = [...this.todos, event.detail];
     }
 
-    @Listen('todoChanged')
+    @Listen('todoStateChanged')
     changeTodo(event) {
         let todos = [...this.todos];
-        let todo = todos.find(item => item.title == event.detail.title);
+        let todo = todos.find(item => item.id === event.detail.id);
         if (todo) {
-            todo = { ...todo, done: event.detail.done };
+            todo = { ...todo, done: !todo.done };
 
-            todos = this.todos.filter(item => item.title != todo.title);
+            todos = this.todos.filter(item => item.id !== todo.id);
             todos.push(todo);
 
             todos.sort((a, b) => {
@@ -34,6 +34,11 @@ export class TodoList {
 
             this.todos = [...todos];
         }
+    }
+
+    @Listen('todoDeleted')
+    deleteTodo(event) {
+        this.todos = [...this.todos.filter(item => item.id !== event.detail.id)];
     }
 
     /*
