@@ -46,7 +46,10 @@ export class TodoList {
         return (
             <section class="todo-list-container">
                 <h2 class="todo-list-title">
-                    TODO List <i class="fa-solid fa-pen"></i>
+                    TODO List{' '}
+                    <button class="edit">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
                 </h2>
                 <div class="todo-list">
                     {/*<todo-item-new onTodoCreated={event => this.addTodo2(event)}></todo-item-new>*/}

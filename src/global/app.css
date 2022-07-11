@@ -2,6 +2,8 @@
     --todo-list-font-size: 1.25rem;
     --todo-item-space: 10px;
     --todo-state-space: 10px;
+    --todo-gray-color: #888;
+    --todo-gray-highlight-color: #666;
 }
 
 * {

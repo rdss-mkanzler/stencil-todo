@@ -1,9 +1,11 @@
+@import '../../assets/fontawesome/css/all.min.css';
+
 article {
     display: block;
     font-size: var(--todo-list-font-size);
     display: grid;
-    grid-template-columns: var(--todo-list-font-size) auto;
-    grid-template-rows: var(--todo-list-font-size) auto;
+    grid-template-columns: auto 1fr 3rem;
+    grid-template-rows: auto auto;
     gap: var(--todo-state-space);
 
     margin: var(--todo-item-space) 0;
@@ -15,27 +17,61 @@ article .todo-state {
     border-radius: 100%;
 
     position: relative;
+
+    width: var(--todo-list-font-size);
+    height: var(--todo-list-font-size);
 }
 
-article.is-done .todo-state:after,
-article .todo-state:hover::after {
-    content: 'X';
+article .todo-state .check {
+    display: none;
+}
+
+article.is-done .todo-state .check,
+article .todo-state:hover .check {
     position: absolute;
-    top: -2px;
-    left: 1.5px;
+    display: block;
 
-    color: black;
+    top: -3px;
+    left: 0;
+    font-size: 1.5rem;
 }
 
-article.is-done .todo-state:after {
-    color: #888;
+article.is-done .todo-state .check {
+    color: var(--todo-gray-color);
 }
 
-article .todo-state:hover::after {
-    color: black !important;
+article .todo-state:hover .check {
+    color: var(--todo-gray-highlight-color) !important;
 }
 
 article.is-done .todo {
     text-decoration: line-through;
-    color: #888;
+    color: var(--todo-gray-color);
+}
+
+article .todo-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--todo-item-space);
+
+    opacity: 0;
+}
+
+article:hover .todo-actions {
+    opacity: 1;
+}
+
+article .todo-actions .action:first-of-type {
+    margin-left: auto;
+}
+
+article .todo-actions .action {
+    color: var(--todo-gray-color);
+    font-size: 1rem;
+}
+
+article .todo-actions .action:hover {
+    color: var(--todo-gray-highlight-color);
+    cursor: pointer;
 }

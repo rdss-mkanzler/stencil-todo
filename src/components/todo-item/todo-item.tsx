@@ -33,8 +33,14 @@ export class TodoItem {
     render() {
         return (
             <article class={this.className}>
-                <div class="todo-state" onClick={event => this.handleStateChange(event)}></div>
+                <div class="todo-state" onClick={event => this.handleStateChange(event)}>
+                    <i class="check fa-solid fa-check"></i>
+                </div>
                 <div class="todo">{this.todo.title}</div>
+                <div class="todo-actions">
+                    <i class="action edit fa-solid fa-pen"></i>
+                    <i class="action delete fa-solid fa-trash"></i>
+                </div>
             </article>
         );
     }
