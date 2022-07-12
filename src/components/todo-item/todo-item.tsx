@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/core';
+import { Component, h, Prop, Event, EventEmitter, State } from '@stencil/core';
 import { Todo } from '../../classes/todo/todo.class';
 
 @Component({
@@ -25,16 +25,16 @@ export class TodoItem {
     /*
         Like VUE emits
     */
-    handleStateChange(event) {
+    handleStateChange() {
         this.todoStateChanged.emit(this.todo);
     }
 
-    handleTodoTitleChange(event) {
+    handleTodoTitleChange() {
         this.todo.title = this.todoTitle;
         this.todoTitleChanged.emit(this.todo);
     }
 
-    handleTodoDeletion(event) {
+    handleTodoDeletion() {
         this.todoDeleted.emit(this.todo);
     }
 
@@ -52,9 +52,9 @@ export class TodoItem {
     /*
         Like VUE methods
     */
-    toggleTodoTitleEditState(event) {
+    toggleTodoTitleEditState() {
         if (this.todoTitleEdit) {
-            this.handleTodoTitleChange(event);
+            this.handleTodoTitleChange();
         }
         this.todoTitleEdit = !this.todoTitleEdit;
     }
@@ -66,7 +66,7 @@ export class TodoItem {
     render() {
         return (
             <article class={this.todoItemClass()}>
-                <div class="todo-state" onClick={event => this.handleStateChange(event)}>
+                <div class="todo-state" onClick={() => this.handleStateChange()}>
                     <i class="check fa-solid fa-check"></i>
                 </div>
                 <div class={this.todoTitleEdit ? 'todo editable' : 'todo'}>
@@ -74,11 +74,8 @@ export class TodoItem {
                     <span class="todo-static">{this.todoTitle}</span>
                 </div>
                 <div class="todo-actions">
-                    <i
-                        class={this.todoTitleEdit ? 'action edit fa-solid fa-arrow-right' : 'action edit fa-solid fa-pen'}
-                        onClick={event => this.toggleTodoTitleEditState(event)}
-                    ></i>
-                    <i class="action delete fa-solid fa-trash" onClick={event => this.handleTodoDeletion(event)}></i>
+                    <i class={this.todoTitleEdit ? 'action edit fa-solid fa-arrow-right' : 'action edit fa-solid fa-pen'} onClick={() => this.toggleTodoTitleEditState()}></i>
+                    <i class="action delete fa-solid fa-trash" onClick={() => this.handleTodoDeletion()}></i>
                 </div>
             </article>
         );
