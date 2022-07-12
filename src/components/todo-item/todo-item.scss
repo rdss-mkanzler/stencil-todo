@@ -7,6 +7,7 @@ article {
     grid-template-columns: auto 1fr 3rem;
     grid-template-rows: auto auto;
     gap: var(--todo-state-space);
+    align-items: center;
 
     margin: var(--todo-item-space) 0;
 
@@ -23,8 +24,10 @@ article {
         }
 
         .todo {
-            text-decoration: line-through;
-            color: var(--todo-gray-color);
+            .todo-static {
+                text-decoration: line-through;
+                color: var(--todo-gray-color);
+            }
         }
 
         .todo-actions {
@@ -34,6 +37,22 @@ article {
             gap: var(--todo-item-space);
 
             opacity: 0;
+        }
+    }
+
+    &.editable {
+        .todo-actions {
+            opacity: 1;
+
+            .edit {
+                &:hover {
+                    color: var(--success-color);
+                }
+            }
+
+            .delete {
+                visibility: hidden;
+            }
         }
     }
 
@@ -69,6 +88,41 @@ article {
         .check {
             color: var(--todo-gray-color);
             display: none;
+        }
+    }
+
+    .todo {
+        &.editable {
+            padding-bottom: 0;
+
+            .todo-input {
+                display: inline-block;
+            }
+
+            .todo-static {
+                display: none;
+            }
+        }
+
+        .todo-input {
+            display: none;
+
+            background-color: transparent;
+            outline: none;
+            border: none;
+
+            border-bottom: 2px solid black;
+
+            font-size: 1.25rem;
+
+            width: 100%;
+
+            padding: 0;
+        }
+
+        .todo-static {
+            display: inline-block;
+            padding-bottom: 2px;
         }
     }
 

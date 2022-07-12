@@ -16,22 +16,48 @@ export class TodoList {
         }
     }
 
+    /*
+        Like VUE watchers
+    */
     @Watch('todos')
     watchTodosHandler(newValue: Todo[]) {
         window.localStorage.setItem('todos', JSON.stringify(newValue));
     }
 
+    /*
+        New way to listen to child events
+    */
     @Listen('todoCreated')
     addTodo(event) {
         this.todos = [...this.todos, event.detail];
     }
 
     @Listen('todoStateChanged')
-    changeTodo(event) {
+    changeTodoState(event) {
         let todos = [...this.todos];
         let todo = todos.find(item => item.id === event.detail.id);
         if (todo) {
             todo = { ...todo, done: !todo.done };
+
+            todos = this.todos.filter(item => item.id !== todo.id);
+            todos.push(todo);
+
+            todos.sort((a, b) => {
+                let dateA = new Date(a.created);
+                let dateB = new Date(b.created);
+                return dateA.getTime() - dateB.getTime();
+            });
+
+            this.todos = [...todos];
+        }
+    }
+
+    @Listen('todoTitleChanged')
+    changeTodoTitle(event) {
+        let todos = [...this.todos];
+        let todo = todos.find(item => item.id === event.detail.id);
+        if (todo) {
+            todo = { ...todo, title: todo.title };
 
             todos = this.todos.filter(item => item.id !== todo.id);
             todos.push(todo);
