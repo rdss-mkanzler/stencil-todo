@@ -28,6 +28,8 @@ export namespace Components {
     }
     interface TodoList {
     }
+    interface TodoListTitle {
+    }
 }
 export interface TodoItemCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -62,11 +64,18 @@ declare global {
         prototype: HTMLTodoListElement;
         new (): HTMLTodoListElement;
     };
+    interface HTMLTodoListTitleElement extends Components.TodoListTitle, HTMLStencilElement {
+    }
+    var HTMLTodoListTitleElement: {
+        prototype: HTMLTodoListTitleElement;
+        new (): HTMLTodoListTitleElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "todo-item": HTMLTodoItemElement;
         "todo-item-new": HTMLTodoItemNewElement;
         "todo-list": HTMLTodoListElement;
+        "todo-list-title": HTMLTodoListTitleElement;
     }
 }
 declare namespace LocalJSX {
@@ -94,11 +103,14 @@ declare namespace LocalJSX {
     }
     interface TodoList {
     }
+    interface TodoListTitle {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "todo-item": TodoItem;
         "todo-item-new": TodoItemNew;
         "todo-list": TodoList;
+        "todo-list-title": TodoListTitle;
     }
 }
 export { LocalJSX as JSX };
@@ -109,6 +121,7 @@ declare module "@stencil/core" {
             "todo-item": LocalJSX.TodoItem & JSXBase.HTMLAttributes<HTMLTodoItemElement>;
             "todo-item-new": LocalJSX.TodoItemNew & JSXBase.HTMLAttributes<HTMLTodoItemNewElement>;
             "todo-list": LocalJSX.TodoList & JSXBase.HTMLAttributes<HTMLTodoListElement>;
+            "todo-list-title": LocalJSX.TodoListTitle & JSXBase.HTMLAttributes<HTMLTodoListTitleElement>;
         }
     }
 }

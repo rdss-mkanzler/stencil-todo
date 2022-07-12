@@ -7,10 +7,6 @@ import { Todo } from '../../classes/todo/todo.class';
     shadow: true,
 })
 export class TodoList {
-    @State() todoListTitle: string = 'TODO List';
-    @State() todoListTitleEdit: Boolean = false;
-    todoListTitleInput: HTMLInputElement;
-
     @State() todos: Todo[] = [];
 
     componentWillLoad() {
@@ -18,30 +14,11 @@ export class TodoList {
         if (todos) {
             this.todos = JSON.parse(todos);
         }
-
-        let todoListTitle = window.localStorage.getItem('todoListTitle');
-        if (todoListTitle) {
-            this.todoListTitle = todoListTitle;
-        } else {
-            this.todoListTitle = 'TODO List #1';
-        }
     }
 
     @Watch('todos')
     watchTodosHandler(newValue: Todo[]) {
         window.localStorage.setItem('todos', JSON.stringify(newValue));
-    }
-
-    @Watch('todoListTitle')
-    watchTodoListTitleHandler(newValue: string) {
-        window.localStorage.setItem('todoListTitle', newValue);
-    }
-
-    @Watch('todoListTitleEdit')
-    watchTodoListTitleEditHandler(newValue: Boolean) {
-        if (newValue) {
-            this.todoListTitleInput.focus();
-        }
     }
 
     @Listen('todoCreated')
@@ -74,16 +51,6 @@ export class TodoList {
         this.todos = [...this.todos.filter(item => item.id !== event.detail.id)];
     }
 
-    toggleTodoListTitleEditState(event) {
-        event.preventDefault();
-
-        this.todoListTitleEdit = !this.todoListTitleEdit;
-    }
-
-    handleTodoListTitleInput(event) {
-        this.todoListTitle = event.target.value;
-    }
-
     /*
     addTodo2(event) {
         console.log('FROM ELEMENT:', event.detail);
@@ -93,18 +60,7 @@ export class TodoList {
     render() {
         return (
             <section class="todo-list-container">
-                <h2 class={this.todoListTitleEdit ? 'todo-list-title editable' : 'todo-list-title'}>
-                    <input
-                        class="title-input"
-                        ref={el => (this.todoListTitleInput = el as HTMLInputElement)}
-                        value={this.todoListTitle}
-                        onInput={event => this.handleTodoListTitleInput(event)}
-                    />
-                    <span class="title-static">{this.todoListTitle}</span>{' '}
-                    <button class="edit" onClick={event => this.toggleTodoListTitleEditState(event)}>
-                        {this.todoListTitleEdit ? <i class="fa-solid fa-arrow-right"></i> : <i class="fa-solid fa-pen"></i>}
-                    </button>
-                </h2>
+                <todo-list-title></todo-list-title>
                 <div class="todo-list">
                     {/*<todo-item-new onTodoCreated={event => this.addTodo2(event)}></todo-item-new>*/}
                     <todo-item-new />
