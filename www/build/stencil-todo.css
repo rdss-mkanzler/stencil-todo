@@ -1,0 +1,1 @@
+:root{--todo-list-font-size:1.25rem;--todo-item-space:10px;--todo-state-space:10px;--todo-gray-color:#888;--todo-gray-highlight-color:#666;--success-color:#008000;--success-highlight-color:#005900}*{box-sizing:border-box;font-family:sans-serif}input{background-color:transparent;outline:none;border:none;border-bottom:2px solid black}
